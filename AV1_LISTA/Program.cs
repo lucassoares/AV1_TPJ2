@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AV1_LISTA
 {
     /// <summary>
-    /// Método para adicionar os objetos na lista
+    /// Classe items
     /// </summary>
     public class Items
     {
@@ -174,9 +174,14 @@ namespace AV1_LISTA
 
             Console.Clear();
             Console.WriteLine("Digite o nome do item para fazer sua busca \n");
-            
+
+            procurarItens(item1);
+        }
+
+       public static Items procurarItens(Items item)
+       {
             string resposta = Console.ReadLine();
-            Items itemIndice = item1;
+            Items itemIndice = item;
             Items itemAnterior = itemIndice;
             while (itemIndice != null && itemIndice.qtdeItems > 0)
             {
@@ -184,19 +189,18 @@ namespace AV1_LISTA
                 {
                     itemIndice.qtdeItems--;
                     Console.WriteLine("Achou {0} na posicao {1}, com {2} disponivel", itemIndice.item, itemIndice.posicao, itemIndice.qtdeItems);
-                    break;
-                    if(itemIndice.qtdeItems <= 0)
+                    if (itemIndice.qtdeItems <= 0)
                     {
                         Console.WriteLine("Não há nenhum {0} em seu inventario", itemIndice.item);
                         itemAnterior.RemoverItems();
                     }
-                    return;
+                    return itemIndice;
                 }
                 itemAnterior = itemIndice;
                 itemIndice = itemIndice.next;
-                Console.WriteLine("O item não está disponivel");
-                return;
             }
+            Console.WriteLine("O item não está disponivel");
+            return itemIndice;
         }
     }
 }
